@@ -13,7 +13,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "SIGNUP")
+@Table(name = "AASIGNUP")
 public class SignupDomain {
 	@Id
 	@GeneratedValue
@@ -29,6 +29,8 @@ public class SignupDomain {
 	private String gender;
 	private String department;
 	private String acceptTerm;
+	
+	
 	public int getSignid() {
 		return signid;
 	}

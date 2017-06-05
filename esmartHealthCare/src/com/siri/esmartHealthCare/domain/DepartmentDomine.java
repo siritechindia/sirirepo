@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "DEPARTMENT")
+@Table(name = "AADEPARTMENT")
 public class DepartmentDomine implements Serializable {
 	
 	/**

@@ -3,6 +3,8 @@ package com.siri.esmartHealthCare.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +18,14 @@ import com.siri.esmartHealthCare.services.SignupServicesI;
 public class HomeController {
 	@Autowired
 	private SignupServicesI signupSer;
+	
+	public HomeController() {
+		// TODO Auto-generated constructor stub
+	}
 
+	@Autowired
+    private JavaMailSender mailSender;
+	
 	String message = "";
 	@RequestMapping(value = "/home")
 	public ModelAndView getHomePage() {
@@ -44,6 +53,23 @@ public class HomeController {
 	@RequestMapping(value="/signupPage",method=RequestMethod.POST)
 	public ModelAndView signupPage(@ModelAttribute("signup") SignupBean signupBean){
 		String msg = signupSer.saveDetails(signupBean);
+		
+			         
+	        // prints debug info
+	        System.out.println("To: " + signupBean.getEmail());
+	        System.out.println("Subject: " + "subject");
+	        System.out.println("Message: " + "message");
+	         
+	        // creates a simple e-mail object
+	        SimpleMailMessage email = new SimpleMailMessage();
+	        email.setTo(signupBean.getEmail());
+	        email.setSubject("subject");
+	        email.setText("message");
+	         
+	        // sends the e-mail
+	        mailSender.send(email);
+		
+		
 		if(msg.equals("success")){
 			message = "registration is successfully completed";
 		}else{

@@ -42,10 +42,10 @@ public class SignupDaoImpl implements SignupDaoI{
 		signupDomaine.setDepartment(signupBean.getDepartment());
 		signupDomaine.setAcceptTerm(signupBean.getAcceptTerm());
 		Session hSession = sf.openSession();
-		//Transaction txn  = hSession.beginTransaction();
+		Transaction txn  = hSession.beginTransaction();
 		Integer serIdValue = (Integer)hSession.save(signupDomaine);
 		System.out.println(serIdValue);
-		//txn.commit();
+		txn.commit();
 		
 		if(serIdValue>0){
 			msg = "success";

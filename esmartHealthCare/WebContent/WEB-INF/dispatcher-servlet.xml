@@ -12,10 +12,10 @@ xmlns:context="http://www.springframework.org/schema/context"
  <context:component-scan base-package="com.siri.esmartHealthCare"></context:component-scan>
  
  <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-    <property name="url" value="jdbc:mysql://localhost:3306/esmar_final"></property>
-    <property name="username" value="root"></property>
-    <property name="password" value="root"></property>
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+    <property name="url" value="jdbc:oracle:thin:@172.21.0.138:1521:dotnetdb"></property>
+    <property name="username" value="GOBIOM_DATA"></property>
+    <property name="password" value="gobiom_data_46#abc"></property>
   </bean>
   
   <bean id="sf" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -23,7 +23,7 @@ xmlns:context="http://www.springframework.org/schema/context"
    
     <property name="hibernateProperties">
       <props>
-        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+        <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
         <prop key="hibernate.show_sql">true</prop>
         <prop key="hibernate.format_sql">true</prop>
         <prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -38,7 +38,19 @@ xmlns:context="http://www.springframework.org/schema/context"
   
   </bean>
   
- 
+ <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="hcs01.gvkbio.com" />
+        <property name="port" value="25" />
+        <property name="username" value="sns.fcd@gmail.com" />
+        <property name="password" value="9440435952" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
   <bean id="viewResolver"
     	class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">
