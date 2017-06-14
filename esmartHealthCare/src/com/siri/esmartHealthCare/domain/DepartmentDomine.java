@@ -3,30 +3,26 @@
  */
 package com.siri.esmartHealthCare.domain;
 
-import java.io.Serializable;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * @author VENU
- *
- */
 @Entity
-@Table(name = "AADEPARTMENT")
-public class DepartmentDomine implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4454437338452220910L;
+@Table(name = "ADEPARTMENT")
+public class DepartmentDomine  {
+
 	
 	@Id
 	@GeneratedValue
+	@Column(name ="DEPTID")
 	private int deptId;
+	@Column(name ="DEPTNAME")
 	private String deptName;
+	@Column(name ="ROLEID")
+	private String roleId;
+	
 	public int getDeptId() {
 		return deptId;
 	}
@@ -38,6 +34,12 @@ public class DepartmentDomine implements Serializable {
 	}
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+	public String getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 	
 

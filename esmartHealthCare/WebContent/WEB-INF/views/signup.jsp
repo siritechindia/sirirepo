@@ -7,6 +7,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="<core:url value="/resources/js/dept.js" />"></script>
+<script type="text/javascript">
+var path = '${pageContext.request.contextPath}';
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
@@ -33,7 +40,9 @@ Department:<select style="width:300px">
 
 </form> --%>
 <form:form action="signupPage" commandName="signup" method="POST">
-First Name<form:input path="firstname"/><br>
+First Name<form:input path="firstname"/>
+<form:errors path="firstname"/>
+<br>
 Middile Name:<form:input path="middlename"/><br>
 Lastname<form:input path="lastname"/><br>
 Email<form:input path="email"/><br>
@@ -42,8 +51,14 @@ Password<form:input path="password"/><br>
 Mobile No<form:input path="mobilenumber"/><br>
 <form:radiobutton path="gender"  value="male"/>Male
 <form:radiobutton path="gender" value="female"/>Female<br>
+
+role:<form:select path="role" id="deptId"><br>
+<form:option value="-" label="--Select role--"/>
+<form:options items="${roleList}"/>
+</form:select><br><br>
+
 department:<form:select path="department"><br>
-<form:option value="-" label="--Select phone"/>
+<form:option value="-" label="--Select detp--"/>
 <form:options items="${deptList}"/>
 </form:select>
 <form:checkbox path="acceptTerm" value="accept terms and conditions" />accept terms and conditions<br>

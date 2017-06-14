@@ -3,12 +3,12 @@ package com.siri.esmartHealthCare.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.siri.esmartHealthCare.beans.SignupBean;
@@ -39,13 +39,14 @@ public class HomeController {
 		System.out.println("sign up is called...");
 		SignupBean signup = new SignupBean();
 		ModelAndView mav = new ModelAndView();
-		List<String> deptListOfNames = signupSer.getDepList();
-		for (String deprartmentName : deptListOfNames) {
-			System.out.println(deprartmentName);
-		}
+		
+		List<String> listOfRoles = signupSer.getRoleList();
+		
+		
 		
 		mav.addObject("signup", signup);
-		mav.addObject("deptList", deptListOfNames);
+		//mav.addObject("deptList", deptListOfNames);
+		mav.addObject("roleList", listOfRoles);
 		mav.setViewName("getSignup");
 		return mav;
 	}
@@ -55,7 +56,7 @@ public class HomeController {
 		String msg = signupSer.saveDetails(signupBean);
 		
 			         
-	        // prints debug info
+	       /* // prints debug info
 	        System.out.println("To: " + signupBean.getEmail());
 	        System.out.println("Subject: " + "subject");
 	        System.out.println("Message: " + "message");
@@ -67,7 +68,7 @@ public class HomeController {
 	        email.setText("message");
 	         
 	        // sends the e-mail
-	        mailSender.send(email);
+	        mailSender.send(email);*/
 		
 		
 		if(msg.equals("success")){
@@ -79,20 +80,24 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("message", message);
 		mav.setViewName("success");
-		//System.out.println("signup page is called");
-		//System.out.println(signup.getFirstname());
-		/*SignupBean sbean=new SignupBean();
-		sbean.setFirstname(signup.getFirstname());
-		sbean.setMiddlename(signup.getMiddlename());
-		sbean.setLastname(signup.getLastname());
-		sbean.setDepartment(signup.getDepartment());
-		sbean.setGender(signup.getGender());
-		sbean.setUserid(signup.getUserid());
-		sbean.setPassword(signup.getPassword());
-		sbean.setAcceptTerm(signup.getAcceptTerm());*/
-		//ModelAndView mav = new ModelAndView();
-		//System.out.println(signup.getFirstname());
+		
 		return mav;
+	}
+	
+	
+	@RequestMapping(value="/getDeptDetails",method = RequestMethod.POST,produces = "application/json")
+	@ResponseBody
+	public List<String> getDeptList(){
+		System.out.println("getDeptDetails is called...");
+		List<String> deptListOfNames = signupSer.getDepList();
+		System.out.println("size  "+deptListOfNames);
+	//ModelAndView mav=new ModelAndView();
+	//mav.setViewName("getSignup");
+		for(String s: deptListOfNames){
+			
+	            System.out.println("Details---- : "+s);
+		 }
+	return deptListOfNames;
 	}
 	@RequestMapping(value="/login")
 	public ModelAndView getLoginPage(){

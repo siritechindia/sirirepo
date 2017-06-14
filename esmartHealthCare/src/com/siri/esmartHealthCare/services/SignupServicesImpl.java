@@ -18,11 +18,19 @@ public class SignupServicesImpl implements SignupServicesI{
 		List<String> deptList = signupDao.getDepList();
 		return deptList;
 	}
+	
+	@Override
+	public List<String> getRoleList() {
+		List<String> roleList = signupDao.getRoleList();
+		return roleList;
+	}
+	
 	@Override
 	public String saveDetails(SignupBean signupBean) {
 		String msg = signupDao.saveDetails(signupBean);
 		
 		return msg;
 	}
+	
 
 }

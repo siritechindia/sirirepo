@@ -3,20 +3,33 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
- http://www.springframework.org/schema/beans/spring-beans.xsd
- http://www.springframework.org/schema/context
- http://www.springframework.org/schema/context/spring-context.xsd">
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:p="http://www.springframework.org/schema/p"
+xmlns:jee="http://www.springframework.org/schema/jee"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+http://www.springframework.org/schema/jee
+http://www.springframework.org/schema/jee/spring-jee.xsd">
  
  <context:component-scan base-package="com.siri.esmartHealthCare"></context:component-scan>
+  <mvc:resources mapping="/resources/**" location="/resources/theme1/"
+	cache-period="31556926"/>
+ <mvc:annotation-driven />
  
- <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+ <jee:jndi-lookup id="ds" jndi-name="jdbc/esmarthealth" resource-ref="true"></jee:jndi-lookup>
+ 
+<!--  <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
     <property name="url" value="jdbc:oracle:thin:@172.21.0.138:1521:dotnetdb"></property>
     <property name="username" value="GOBIOM_DATA"></property>
     <property name="password" value="gobiom_data_46#abc"></property>
-  </bean>
+  </bean> -->
   
   <bean id="sf" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
   <property name="dataSource" ref="ds"></property>
@@ -39,15 +52,14 @@ xmlns:context="http://www.springframework.org/schema/context"
   </bean>
   
  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="hcs01.gvkbio.com" />
-        <property name="port" value="25" />
-        <property name="username" value="sns.fcd@gmail.com" />
-        <property name="password" value="9440435952" />
+         <property name="host" value="smtp.gmail.com"></property>
+  <property name="port" value="25"></property>
+  <property name="username" value="shreekanth.gummadi@excelra.com"></property>
+  <property name="password" value="123456aA"></property>
         <property name="javaMailProperties">
             <props>
-                <prop key="mail.transport.protocol">smtp</prop>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
+               <prop key="mail.smtp.auth">false</prop>
+      			 <prop key="mail.smtp.starttls.enable">false</prop>
             </props>
         </property>
     </bean>
@@ -73,4 +85,11 @@ xmlns:context="http://www.springframework.org/schema/context"
 		  </array>
 	  </property>
   </bean>
+  
+ <!--  <bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:message" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean> -->
+  
  </beans>

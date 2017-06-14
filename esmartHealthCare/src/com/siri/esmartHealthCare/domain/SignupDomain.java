@@ -28,6 +28,7 @@ public class SignupDomain {
 	private String mobilenumber;
 	private String gender;
 	private String department;
+	private String role;
 	private String acceptTerm;
 	
 	
@@ -91,6 +92,14 @@ public class SignupDomain {
 	}
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+	
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	public String getAcceptTerm() {
 		return acceptTerm;

@@ -3,21 +3,23 @@
  */
 package com.siri.esmartHealthCare.beans;
 
-import java.util.List;
-
 /**
  * @author VENU
  *
  */
 public class SignupBean {
+	
+	//@NotEmpty
 	private String firstname;
 	private String middlename;
 	private String lastname;
+	//@Email
 	private String email;
 	private String userid;
 	private String password;
 	private String mobilenumber;
 	private String gender;
+	private String role;
 	private String department;
 	private String acceptTerm;
 	public String getFirstname() {
@@ -82,6 +84,12 @@ public class SignupBean {
 	}
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	
