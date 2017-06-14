@@ -52,15 +52,25 @@ Mobile No<form:input path="mobilenumber"/><br>
 <form:radiobutton path="gender"  value="male"/>Male
 <form:radiobutton path="gender" value="female"/>Female<br>
 
-role:<form:select path="role" id="deptId"><br>
+role:<form:select path="role" id="roleId" ><br>
 <form:option value="-" label="--Select role--"/>
 <form:options items="${roleList}"/>
 </form:select><br><br>
 
-department:<form:select path="department"><br>
+<%-- department:<form:select path="department" id="deptId"><br>
 <form:option value="-" label="--Select detp--"/>
 <form:options items="${deptList}"/>
-</form:select>
+</form:select> --%>
+<%-- <core:choose>
+  <core:when test="${condition1}">
+    ...
+  </core:when>
+
+  <c:otherwise>
+    ...
+  </c:otherwise>
+</core:choose> --%>
+<label id="lableId"></label><div id="deptId"></div>
 <form:checkbox path="acceptTerm" value="accept terms and conditions" />accept terms and conditions<br>
 <input type="submit" value="Submit"/>
 <input type="submit" value="Cancel"/><br><br><br><br>
