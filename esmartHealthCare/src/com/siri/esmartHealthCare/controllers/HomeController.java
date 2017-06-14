@@ -1,5 +1,6 @@
 package com.siri.esmartHealthCare.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,19 +86,29 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value="/getDeptDetails",method = RequestMethod.POST,produces = "application/json")
-	@ResponseBody
-	public List<String> getDeptList(){
+	@RequestMapping(value="/getDeptDetails",method = RequestMethod.POST)	
+	public @ResponseBody List<String> getDeptList(){
+		List<String> deptListOfNames = null;
+		List<String> deptListOfNames2 =null;
+		try{
 		System.out.println("getDeptDetails is called...");
-		List<String> deptListOfNames = signupSer.getDepList();
+		 deptListOfNames = signupSer.getDepList();
 		System.out.println("size  "+deptListOfNames);
 	//ModelAndView mav=new ModelAndView();
 	//mav.setViewName("getSignup");
+		
+		 deptListOfNames2 = new ArrayList<String>(); 
+		deptListOfNames2.add("shreek1");
+		deptListOfNames2.add("shreek2");
+		deptListOfNames2.add("shreek3");
 		for(String s: deptListOfNames){
 			
 	            System.out.println("Details---- : "+s);
 		 }
-	return deptListOfNames;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	return deptListOfNames2;
 	}
 	@RequestMapping(value="/login")
 	public ModelAndView getLoginPage(){
